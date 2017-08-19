@@ -9,6 +9,7 @@ Bits and pieces have been sourced from other fine Docker images
 
 - `PUID` - Changes the uid of the app user, default 911
 - `PGID` - Changes the gid of the app group, default 911
+- `DISABLE_SYSLOG` - If set to TRUE, do not run rsyslog inside the container. Default is FALSE
 - `SMTP_HOST` - Change the SMTP relay server used by ssmtp (sendmail) 
 - `SMTP_USER` - Username for the SMTP relay server
 - `SMTP_PASS` - Password for the SMTP relay server
