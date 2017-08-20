@@ -18,6 +18,10 @@ Bits and pieces have been sourced from other fine Docker images
 - `SMTP_TLS` - Use STARTTLS, default TRUE (if SMTP_TLS is FALSE and SMTP_SECURE is true, SMTP over SSL will be used)
 - `SMTP_MASQ` - Masquerade outbound emails using this domain, default empty
 
+#### Email
+
+If you need to send mail and cannot use SMTP directly, ssmtp is installed to provide `/usr/bin/sendmail` and is configured using the `SMTP_` variables.
+
 #### Persistent data
 
 Generally I store configuration data in /config and store it in a volume. If an application does not permit changing the location of its configuration data, add a script to `/etc/cont-init.d` which changes the app user's $HOME
