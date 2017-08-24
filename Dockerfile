@@ -1,9 +1,14 @@
 FROM alpine:3.6
-MAINTAINER Allan Willems Joergensen <allan@nowhere.dk>
+MAINTAINER ajoergensen
 
 COPY files/repositories /etc/apk/repositories
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US.UTF-8' TERM='xterm' 
+
+LABEL org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.vcs-url="https://github.com/ajoergensen/baseimage-alpine.git" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.schema-version="1.0.0-rc1"
 
 RUN \
 	apk -U upgrade && \
