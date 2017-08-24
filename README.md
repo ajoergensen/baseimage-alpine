@@ -1,7 +1,7 @@
 Alpine baseimage
 ================
 
-[![](https://images.microbadger.com/badges/image/ajoergensen/baseimage-alpine.svg)](https://microbadger.com/images/ajoergensen/baseimage-alpine "Get your own image badge on microbadger.com") [![Build Status](https://travis-ci.org/ajoergensen/docker-baseimage-alpine.svg?branch=master)](https://travis-ci.org/ajoergensen/docker-baseimage-alpine) [![](https://images.microbadger.com/badges/commit/ajoergensen/baseimage-alpine.svg)](https://microbadger.com/images/ajoergensen/baseimage-alpine "Get your own commit badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/ajoergensen/baseimage-alpine.svg)](https://microbadger.com/images/ajoergensen/baseimage-alpine "Get your own image badge on microbadger.com") [![Build Status](https://travis-ci.org/ajoergensen/baseimage-alpine.svg?branch=master)](https://travis-ci.org/ajoergensen/baseimage-alpine) [![](https://images.microbadger.com/badges/commit/ajoergensen/baseimage-alpine.svg)](https://microbadger.com/images/ajoergensen/baseimage-alpine "Get your own commit badge on microbadger.com")
 
 A baseimage based on Alpine 3.6 with s6 init.
 
