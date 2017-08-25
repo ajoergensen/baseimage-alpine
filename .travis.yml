@@ -7,7 +7,7 @@ before_install:
 script:
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 - echo $REPO:$TAG
-- IMAGE_NAME=$REPO ./hooks/build
+- IMAGE_NAME=$REPO:$TAG ./hooks/build
 - docker run --name $NAME -d $REPO:$TAG
 - docker ps -a
 - sleep 5
