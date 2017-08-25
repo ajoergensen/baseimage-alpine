@@ -1,5 +1,6 @@
 #!/usr/bin/with-contenv bash
-if [[ $DEBUG=${true,,} ]]
+shopt -s nocasematch
+if [[ $DEBUG == "TRUE" ]]
  then
 	set -x
 fi
@@ -17,7 +18,6 @@ fi
 
 if [[ $REMOTE_SYSLOG_HOST != "FALSE" ]]
  then
-	shopt -s nocasematch
 	case $REMOTE_SYSLOG_PROTO in
         	udp)
 			PROTO="@@"
