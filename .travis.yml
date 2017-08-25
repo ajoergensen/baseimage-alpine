@@ -17,7 +17,7 @@ script:
 - docker run --name $NAME -e DISABLE_SYSLOG=TRUE -d $REPO:$TAG
 - docker ps -a
 - sleep 5
-- docker exec $NAME ps aux | grep -v rsyslogd > /dev/null 2>&1
+- docker exec $NAME ps aux | grep -v rsyslogd 
 after_script:
 - docker rm -f $NAME
 env:
@@ -26,4 +26,3 @@ env:
   - REPO=ajoergensen/$NAME
 notifications:
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
-~                                                               
