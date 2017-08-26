@@ -8,7 +8,7 @@ script:
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 - echo $REPO:$TAG
 - IMAGE_NAME=$REPO:$TAG ./hooks/build
-- docker run --name $NAME -d $REPO:$TAG
+- docker run --name $NAME -e DISABLE_CRON=false -d $REPO:$TAG
 - docker ps -a
 - sleep 5
 - docker logs $NAME
@@ -19,7 +19,6 @@ script:
 - docker ps -a
 - sleep 5
 - docker exec $NAME ps aux | grep -v rsyslogd 
-- docker exec $NAME ps aux | grep -v "/usr/sbin/fcron"
 after_script:
 - docker rm -f $NAME
 env:
