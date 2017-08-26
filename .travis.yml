@@ -13,11 +13,13 @@ script:
 - sleep 5
 - docker logs $NAME
 - docker exec $NAME pgrep rsyslogd
+- docker exec $NAME pgrep fcron
 - docker rm -f $NAME
 - docker run --name $NAME -e DISABLE_SYSLOG=TRUE -d $REPO:$TAG
 - docker ps -a
 - sleep 5
 - docker exec $NAME ps aux | grep -v rsyslogd 
+- docker exec $NAME ps aux | grep -v "/usr/sbin/fcron"
 after_script:
 - docker rm -f $NAME
 env:

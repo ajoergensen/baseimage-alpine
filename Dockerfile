@@ -5,6 +5,8 @@ COPY files/repositories /etc/apk/repositories
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US.UTF-8' TERM='xterm' 
 
+ARG BUILD_DATE
+ARG VCS_REF
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/ajoergensen/baseimage-alpine.git" \
       org.label-schema.vcs-ref=$VCS_REF \
@@ -12,7 +14,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 
 RUN \
 	apk -U upgrade && \
-	apk add rsyslog busybox-extras bash bash-completion bind-tools ssmtp curl file wget tar ca-certificates shadow tzdata && \
+	apk add rsyslog fcron busybox-extras bash bash-completion bind-tools ssmtp curl file wget tar ca-certificates shadow tzdata && \
 	cp /usr/share/zoneinfo/Europe/Copenhagen /etc/localtime && \
 	apk del tzdata && \
 	curl -sSL `curl -s https://api.github.com/repos/just-containers/s6-overlay/releases/latest | grep 'browser_' | cut -d\" -f4 | grep "s6-overlay-amd64.tar.gz$"` | tar xvfz - -C / && \
