@@ -5,7 +5,7 @@ if [[ $DEBUG == "true" ]]
 	set -x
 fi
 
-: ${DISABLE_CRON:="true"}
+: ${DISABLE_CRON:="false"}
 
 if [[ $DISABLE_CRON == "true" ]]
  then
