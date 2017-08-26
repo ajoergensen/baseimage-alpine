@@ -24,6 +24,37 @@ Bits and pieces have been sourced from other fine Docker images
 - `SMTP_TLS` - Use STARTTLS, default TRUE (if SMTP_TLS is FALSE and SMTP_SECURE is true, SMTP over SSL will be used)
 - `SMTP_MASQ` - Masquerade outbound emails using this domain, default empty
 
+#### Running applications
+
+It is recommended to run applications as the unpriviledged user `app`.
+
+To run the application, add a start-up script like this
+
+```bash
+#/usr/bin/with-contenv bash
+exec s6-setuidgid app /path/to/application
+```
+
+One shortcoming is the fact `s6-setuidgid` does not set the `$HOME` variable. The work-around looks like this:
+
+```bash
+#/usr/bin/with-contenv bash
+export HOME="~app"
+exec s6-setuidgid app /path/to/application
+```
+
+I have looked at the possiblity of adding [setuser](https://github.com/phusion/baseimage-docker/blob/master/image/bin/setuser) from the phusion baseimage but doing requires installing Python 3 which add bloat.
+
+If you want add setuser, create a `Dockerfile` like this:
+
+```
+FROM ajoergensen/baseimage-alpine
+RUN \
+        apk add --no-cache python3 && \
+        wget https://raw.githubusercontent.com/phusion/baseimage-docker/master/image/bin/setuser -O /sbin/setuser && \
+        chmod +x /sbin/setuser
+```
+
 #### Email
 
 If you need to send mail and cannot use SMTP directly, ssmtp is installed to provide `/usr/bin/sendmail` and is configured using the `SMTP_` variables.
