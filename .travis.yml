@@ -22,7 +22,7 @@ after_script:
 - docker rm -f $NAME
 env:
   global:
-  - NAME=baseimage-centos
+  - NAME=baseimage-alpine
   - REPO=ajoergensen/$NAME
 notifications:
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
