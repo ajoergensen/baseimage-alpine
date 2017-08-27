@@ -1,9 +1,7 @@
 Alpine baseimage
 ================
 
-[![](https://images.microbadger.com/badges/image/ajoergensen/baseimage-alpine.svg)](https://microbadger.com/images/ajoergensen/baseimage-alpine "Get your own image badge on microbadger.com") [![Build Status](https://travis-ci.org/ajoergensen/baseimage-alpine.svg?branch=master)](https://travis-ci.org/ajoergensen/baseimage-alpine) [![](https://images.microbadger.com/badges/commit/ajoergensen/baseimage-alpine.svg)](https://microbadger.com/images/ajoergensen/baseimage-alpine "Get your own commit badge on microbadger.com")
-
-A baseimage based on Alpine 3.6 with s6 init.
+A baseimage based on Alpine 3.6 with [Skarnet's s6 process supervision](http://www.skarnet.org/software/s6/) installed from [Just Container's s6 Overlay](https://github.com/just-containers/s6-overlay).
 
 Bits and pieces have been sourced from other fine Docker images
 
