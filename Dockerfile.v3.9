@@ -1,0 +1,29 @@
+FROM alpine:3.9
+MAINTAINER ajoergensen
+
+COPY files/repositories /etc/apk/repositories
+
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US.UTF-8' TERM='xterm' 
+
+RUN \
+	sed -i 's|@@VERSION@@|v3.9|g' /etc/apk/repositories && \
+	apk -U upgrade && \
+	apk add rsyslog busybox-extras bash bash-completion bind-tools ssmtp curl file wget tar ca-certificates shadow tzdata jq && \
+	cp /usr/share/zoneinfo/Europe/Copenhagen /etc/localtime && \
+	apk del tzdata && \
+	curl -sSL `curl -s https://api.github.com/repos/just-containers/s6-overlay/releases/latest | grep 'browser_' | cut -d\" -f4 | grep "s6-overlay-amd64.tar.gz$"` | tar xvfz - -C / && \
+	wget -qO - https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz | tar zxf - -C /usr/local/bin && \
+	groupadd -g 911 app && \
+	useradd -u 911 -g 911 -s /bin/false -m app && \
+        usermod -G users app && \
+	mkdir -p /app /config /defaults && \
+	rm -rf /var/cache/apk/* /etc/rsyslog.conf
+
+ADD root /
+
+RUN chmod -v +x /etc/cont-init.d/*
+
+VOLUME /config
+
+ENTRYPOINT ["/init"]
+CMD []

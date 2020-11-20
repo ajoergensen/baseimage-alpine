@@ -1,0 +1,5 @@
+http://dl-8.alpinelinux.org/alpine/@@VERSION@@/main
+http://dl-8.alpinelinux.org/alpine/@@VERSION@@/community
+@edge http://dl-8.alpinelinux.org/alpine/edge/main
+@testing http://dl-8.alpinelinux.org/alpine/edge/testing
+@edgecommunity http://dl-8.alpinelinux.org/alpine/edge/community
