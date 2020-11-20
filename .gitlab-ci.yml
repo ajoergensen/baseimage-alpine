@@ -4,9 +4,6 @@ variables:
   DOCKER_DRIVER: overlay2
   DB: docker build --pull --no-cache --force-rm=true
 
-services:
- - docker:dind
-
 before_script:
  - docker info
  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
