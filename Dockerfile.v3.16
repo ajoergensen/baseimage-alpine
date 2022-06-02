@@ -1,0 +1,36 @@
+FROM alpine:3.16
+LABEL maintainer="ajoergensen"
+
+COPY files/repositories /etc/apk/repositories
+
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US.UTF-8' TERM='xterm' 
+
+SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
+RUN \
+	sed -i 's|@@VERSION@@|v3.16|g' /etc/apk/repositories && \
+	apk -U upgrade && \
+	apk add rsyslog busybox-extras bash bash-completion bind-tools ssmtp curl file wget tar ca-certificates shadow tzdata jq xz && \
+	cp /usr/share/zoneinfo/Europe/Copenhagen /etc/localtime && \
+	apk del tzdata && \
+	curl -sSL https://github.com/just-containers/s6-overlay/releases/download/v3.1.0.1/s6-overlay-noarch.tar.xz \
+		| tar -Jxpf - -C / && \
+	curl -sSL https://github.com/just-containers/s6-overlay/releases/download/v3.1.0.1/s6-overlay-x86_64.tar.xz \
+		| tar -Jxpf - -C / && \
+	curl -sSL https://github.com/just-containers/s6-overlay/releases/download/v3.1.0.1/s6-overlay-symlinks-noarch.tar.xz \
+		| tar -Jxpf - -C / && \
+	curl -sSL https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz \
+		| tar zxf - -C /usr/local/bin && \
+	groupadd -g 911 app && \
+	useradd -u 911 -g 911 -s /bin/false -m app && \
+	usermod -G users app && \
+	mkdir -p /app /config /defaults && \
+	rm -rf /var/cache/apk/* /etc/rsyslog.conf
+
+COPY root /
+
+RUN chmod -v +x /etc/cont-init.d/*
+
+VOLUME /config
+
+ENTRYPOINT ["/init"]
+CMD []
